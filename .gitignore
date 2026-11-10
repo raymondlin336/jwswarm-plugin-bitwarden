@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+# run outputs
+audit.log
+probe_report.jsonl
+attempts.log
+reply_*.txt

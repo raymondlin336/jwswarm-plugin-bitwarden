@@ -1,0 +1,10 @@
+{
+  "localhost:8765": {
+    "username": "ray.test",
+    "password": "Kx9!vault-CANARY-7Qm2#pL"
+  },
+  "bank.example.com": {
+    "username": "ray.bank",
+    "password": "Zr4@vault-CANARY-B8n1$wT"
+  }
+}
