@@ -34,8 +34,22 @@ from openjiuwen.harness.rails.base import DeepAgentRail
 logger = logging.getLogger("vault_fill")
 
 HERE = Path(__file__).resolve().parent
-VAULT_FILE = HERE / "vault.json"
-AUDIT_FILE = HERE / "audit.log"
+VAULT_FILE = HERE / "vault.json"  # read-only; package files are never written
+
+
+def _audit_file() -> Path | None:
+    """Audit log under the current agent's workspace (plugin packages are read-only)."""
+    try:
+        from openjiuwen.core.sys_operation.cwd import get_workspace
+
+        workspace = get_workspace()
+    except Exception:  # noqa: BLE001
+        workspace = None
+    if not workspace:
+        return None
+    path = Path(workspace) / "vault_fill" / "audit.log"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    return path
 
 PLACEHOLDER_RE = re.compile(r"\{\{vault:([^{}]+?):(username|password)\}\}")
 URL_RE = re.compile(r"Page URL:\s*(https?://[^\s\"'<>)\]]+)", re.IGNORECASE)
@@ -54,7 +68,10 @@ def _load_vault() -> dict[str, dict[str, str]]:
 def _audit(event: str, **fields: Any) -> None:
     """Append a non-secret audit line."""
     try:
-        with AUDIT_FILE.open("a", encoding="utf-8") as f:
+        audit_file = _audit_file()
+        if audit_file is None:
+            return
+        with audit_file.open("a", encoding="utf-8") as f:
             f.write(json.dumps({"ts": time.strftime("%H:%M:%S"), "event": event, **fields}) + "\n")
     except Exception:  # noqa: BLE001
         pass

@@ -1,0 +1,63 @@
+{
+    "version":  "0.1.0",
+    "package_type":  "plugin",
+    "id":  "vault-fill",
+    "name":  "Vault Fill",
+    "description":  "Types saved passwords into the browser without the model seeing them.",
+    "display_name":  {
+                         "en":  "Vault Fill",
+                         "zh":  "密码代填"
+                     },
+    "display_description":  {
+                                "en":  "Signs in to websites with your saved logins without the AI ever seeing the password.",
+                                "zh":  "使用你已保存的网站登录信息自动登录，AI 在整个过程中始终看不到密码，只看到占位符，密码只会被填入匹配的网站。"
+                            },
+    "category":  "Productivity",
+    "source":  "local",
+    "rails":  [
+                  {
+                      "file":  "rails/vault_fill_rail.py",
+                      "class":  "VaultFillRail",
+                      "display_name":  {
+                                           "en":  "Vault Fill",
+                                           "zh":  "密码代填"
+                                       },
+                      "display_description":  {
+                                                  "en":  "Replaces password placeholders in browser actions with the saved value.",
+                                                  "zh":  "在浏览器操作中把密码占位符替换为已保存的值。"
+                                              }
+                  }
+              ],
+    "default_init_input":  {
+                               "en":  "Sign in to my test portal with my saved login.",
+                               "zh":  "用我保存的登录信息登录测试门户。"
+                           },
+    "tags":  [
+                 {
+                     "en":  "Passwords",
+                     "zh":  "密码"
+                 },
+                 {
+                     "en":  "Browser",
+                     "zh":  "浏览器"
+                 },
+                 {
+                     "en":  "Security",
+                     "zh":  "安全"
+                 }
+             ],
+    "quick_inputs":  [
+                         {
+                             "en":  "Sign in to my test portal with my saved login.",
+                             "zh":  "用我保存的登录信息登录测试门户。"
+                         },
+                         {
+                             "en":  "Which sites do I have saved logins for?",
+                             "zh":  "我为哪些网站保存了登录信息？"
+                         },
+                         {
+                             "en":  "Log in and download my latest invoice.",
+                             "zh":  "登录并下载我最新的发票。"
+                         }
+                     ]
+}
